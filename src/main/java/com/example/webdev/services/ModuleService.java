@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webdev.models.Course;
+
 import com.example.webdev.models.Module;
 import com.example.webdev.repositories.CourseRepository;
 import com.example.webdev.repositories.ModuleRepository;
+
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -41,21 +43,31 @@ public class ModuleService {
 	@GetMapping("/api/course/{courseId}/module")
 	public List<Module> findAllModulesForCourse(
 			@PathVariable("courseId") int courseId) {
-		Optional<Course> data =
-	courseRepository.findById(courseId);
+		Optional<Course> data =courseRepository.findById(courseId);
 		if(data.isPresent()) {
 			Course course = data.get();
 			return course.getModules();
 		}
 		return null;		
 	}
-	@DeleteMapping("/api/module/{mId}")
+	
+	
+	@GetMapping("api/module")
+	public Iterable <Module> findAllModules()
+	{return moduleRepository.findAll();} 
+	
+	
+	
+	
+	
+	
+		
+	@DeleteMapping("/api/module/{moduleId}")
 	public void deleteModule(
-	  @PathVariable("mId")
-	    int moduleId) {
-		moduleRepository.deleteById(moduleId);
+	  @PathVariable("moduleId") int ModuleId) {
+		moduleRepository.deleteById(ModuleId);
 	}
 
 
-
+	
 }

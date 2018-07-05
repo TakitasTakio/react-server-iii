@@ -18,6 +18,7 @@ import com.example.webdev.repositories.CourseRepository;
 public class CourseService {
   @Autowired
   CourseRepository courseRepository;
+  
   @GetMapping("/api/course")
   public Iterable <Course> findAllCourses(){
 	  return courseRepository.findAll();

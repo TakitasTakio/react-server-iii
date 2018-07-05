@@ -1,10 +1,13 @@
 package com.example.webdev.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -15,6 +18,12 @@ public class Module {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	
 	private int id;
+	public List<Lesson> getLessons() {
+		return lessons;
+	}
+	public void setLessons(List<Lesson> lessons) {
+		this.lessons = lessons;
+	}
 	public int getId() {
 		return id;
 	}
@@ -37,6 +46,13 @@ public class Module {
 	@ManyToOne
 	@JsonIgnore
 	private Course course;
+	
+	 
+	@OneToMany(mappedBy="module")
+	private List<Lesson> lessons; 
+	 
+	
+	
 
 	
 	
